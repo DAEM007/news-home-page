@@ -6,6 +6,7 @@ import { menuItems } from "./data";
 import { NavItemProps } from "./data";
 import { ModalOpen } from "./data";
 import { ModalOpen as NavProps } from "./data";
+import "./navbar.scss";
 
 export const NavBar = ({ toggleNav, navActive }: NavProps) => {
   return (
