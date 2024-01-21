@@ -10,7 +10,7 @@ import "./navbar.scss";
 
 export const NavBar = ({ toggleNav, navActive }: NavProps) => {
   return (
-    <nav className={`nav-mobile`}>
+    <nav className={`nav`}>
       <div className="logo">
         <Image src={Logo} alt="logo-pic" />
       </div>
@@ -21,6 +21,27 @@ export const NavBar = ({ toggleNav, navActive }: NavProps) => {
         onClick={toggleNav}
       />
       {navActive && <Modal toggleNav={toggleNav} navActive={navActive} />}
+      <div className="menu-desktop">
+        <ul className="nav-links">
+          <RxCross2
+            className={`hamburger-desktop cross-active ${
+              navActive ? "cross-block" : "cross"
+            }`}
+            fontSize={50}
+            fontWeight={800}
+            onClick={toggleNav}
+          />
+          {menuItems.map((item, index) => (
+            <NavItem
+              key={item.href}
+              href={item.href}
+              label={item.label}
+              // active={index === activeIdx}
+              // onClick={() => handleItemClick(index)}
+            />
+          ))}
+        </ul>
+      </div>
     </nav>
   );
 };
@@ -30,7 +51,9 @@ export const Modal: React.FC<ModalOpen> = ({ toggleNav, navActive }) => {
     <nav className={`modal ${navActive ? "active" : ""}`}>
       <ul className="nav-links">
         <RxCross2
-          className={`cross-active ${navActive ? "cross-block" : "cross"}`}
+          className={`hamburger-desktop cross-active ${
+            navActive ? "cross-block" : "cross"
+          }`}
           fontSize={50}
           fontWeight={800}
           onClick={toggleNav}
