@@ -1,6 +1,6 @@
 @import "../../../styles/variables.scss";
 
-.nav-mobile {
+.nav {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -13,10 +13,17 @@
     display: flex;
   }
 
+  @media (min-width: $sm-breakpoint) {
+    .cross,
+    .cross-block {
+      display: none;
+    }
+  }
+
   .cross-active {
     margin-left: auto;
     margin-top: 20px;
-    margin-right: 10px;
+    margin-right: 20px;
     margin-bottom: 50px;
   }
 
@@ -38,9 +45,13 @@
       visibility: visible;
       transform: translateX(0%);
     }
+    @media (min-width: $sm-breakpoint) {
+      .modal {
+        display: none;
+      }
+    }
     .nav-links {
-      display: flex;
-      flex-direction: column;
+      width: 100%;
       text-decoration: none;
       margin-left: 20px;
       margin-top: 5px;
@@ -50,6 +61,25 @@
           text-decoration: none;
           color: $color-very-dark-blue;
           font-weight: $font-600;
+        }
+      }
+    }
+  }
+
+  .menu-desktop {
+    display: none;
+    @media (min-width: $sm-breakpoint) {
+      width: 100%;
+      display: flex;
+      .nav-links {
+        display: flex;
+        margin-left: auto;
+        .nav-link {
+          margin-left: 20px;
+          .nav-item {
+            text-decoration: none;
+            color: $color-very-dark-blue;
+          }
         }
       }
     }
