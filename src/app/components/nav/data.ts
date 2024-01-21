@@ -1,5 +1,3 @@
-
-
 // interface menu props
 interface MenuItemsProps {
     href: string;
