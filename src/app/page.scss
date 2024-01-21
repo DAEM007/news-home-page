@@ -1,0 +1,71 @@
+@import "../styles/variables.scss";
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 2;
+}
+
+.home {
+  header {
+    margin: 20px auto;
+    .nav-mobile {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px;
+
+      .cross {
+        display: none;
+      }
+      .cross-block {
+        display: flex;
+      }
+
+      .cross-active {
+        margin-left: auto;
+        margin-top: 30px;
+        margin-right: 10px;
+        margin-bottom: 50px;
+      }
+
+      .modal {
+        visibility: hidden;
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: 250px;
+        height: 100vh;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        background-color: $color-off-white;
+        opacity: 0;
+        transform: translateX(100%);
+        transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+
+        &.active {
+          opacity: 1;
+          visibility: visible;
+          transform: translateX(0%);
+        }
+        .nav-links {
+          display: flex;
+          flex-direction: column;
+          text-decoration: none;
+          margin-left: 20px;
+          margin-top: 5px;
+          .nav-link {
+            margin-top: 30px;
+            .nav-item {
+              text-decoration: none;
+              color: $color-very-dark-blue;
+            }
+          }
+        }
+      }
+    }
+  }
+}

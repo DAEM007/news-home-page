@@ -1,95 +1,72 @@
+"use client";
+import { useState } from "react";
+import Link from "next/link";
+import "./page.scss";
+import { RxCross2, RxHamburgerMenu } from "react-icons/rx";
 import Image from "next/image";
-import styles from "./page.module.css";
+import Logo from "../assets/images/logo.svg";
+import { menuItems } from "./data";
+import { NavItemProps } from "./data";
+import { ModalOpen } from "./data";
 
 export default function Home() {
+  const [navActive, setNavActive] = useState(false);
+
+  const toggleNav = () => {
+    setNavActive(!navActive);
+  };
+
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>src/app/page.tsx</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
-
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore starter templates for Next.js.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
+    <div className={`home container ${navActive ? "overlay" : ""}`}>
+      <header>
+        <nav className={`nav-mobile`}>
+          <div className="logo">
+            <Image src={Logo} alt="logo-pic" />
+          </div>
+          <RxHamburgerMenu
+            className={`${navActive ? "cross" : "cross-block"}`}
+            fontSize={40}
+            fontWeight={800}
+            onClick={toggleNav}
+          />
+          {navActive && <Modal toggleNav={toggleNav} navActive={navActive} />}
+        </nav>
+      </header>
+    </div>
   );
 }
+
+export const Modal: React.FC<ModalOpen> = ({ toggleNav, navActive }) => {
+  return (
+    <nav className={`modal ${navActive ? "active" : ""}`}>
+      <ul className="nav-links">
+        <RxCross2
+          className={`cross-active ${navActive ? "cross-block" : "cross"}`}
+          fontSize={40}
+          fontWeight={800}
+          onClick={toggleNav}
+        />
+        {menuItems.map((item, index) => (
+          <NavItem
+            key={item.href}
+            href={item.href}
+            label={item.label}
+            // active={index === activeIdx}
+            // onClick={() => handleItemClick(index)}
+          />
+        ))}
+      </ul>
+    </nav>
+  );
+};
+
+export const NavItem = ({ href, label, active }: NavItemProps) => {
+  // handle active styles later...
+  return (
+    <div className="nav-link">
+      <Link href={href} className={`nav-item ${active ? "active" : ""}`}>
+        {label}
+      </Link>
+    </div>
+  );
+};
