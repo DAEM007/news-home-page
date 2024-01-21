@@ -16,7 +16,7 @@ export const NavBar = ({ toggleNav, navActive }: NavProps) => {
       </div>
       <RxHamburgerMenu
         className={`${navActive ? "cross" : "cross-block"}`}
-        fontSize={40}
+        fontSize={50}
         fontWeight={800}
         onClick={toggleNav}
       />
@@ -31,7 +31,7 @@ export const Modal: React.FC<ModalOpen> = ({ toggleNav, navActive }) => {
       <ul className="nav-links">
         <RxCross2
           className={`cross-active ${navActive ? "cross-block" : "cross"}`}
-          fontSize={40}
+          fontSize={50}
           fontWeight={800}
           onClick={toggleNav}
         />

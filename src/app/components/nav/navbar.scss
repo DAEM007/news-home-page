@@ -15,7 +15,7 @@
 
   .cross-active {
     margin-left: auto;
-    margin-top: 30px;
+    margin-top: 20px;
     margin-right: 10px;
     margin-bottom: 50px;
   }
@@ -49,6 +49,7 @@
         .nav-item {
           text-decoration: none;
           color: $color-very-dark-blue;
+          font-weight: $font-600;
         }
       }
     }
